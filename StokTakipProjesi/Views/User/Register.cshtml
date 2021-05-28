@@ -1,0 +1,54 @@
+﻿@using StokTakipProjesi.Models.Entites
+
+@model Users
+
+@{
+    ViewBag.Title = "Kayıt Ol";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="row general-div">
+        <div class="col-xs-12 general-div bg-success">
+            <h3 class="text-center"><b>Kayıt Ol</b></h3>
+        </div>
+
+
+        @if (ViewBag.Result != null && ViewBag.Message != null)
+        {
+            <div class="col-xs-12 general-div bg-@ViewBag.Result" style="margin-top: 20px;">
+                <p class="text-@ViewBag.Result">@ViewBag.Message</p>
+            </div>
+        }
+
+        @using (Html.BeginForm("Register", "User", FormMethod.Post, new { @class = "col-md-4 col-md-offset-4 form-group" }))
+        {
+            @Html.ValidationSummary(true)
+            <div class="p-10">
+                <label>Kullanıcı Adı</label>
+                <input type="text" class="form-control" name="Username" placeholder="Kullanıcı adınızı yazınız" required />
+            </div>
+
+            <div class="p-10">
+                <label>Email Adresi</label>
+                <input type="email" class="form-control" name="Email" placeholder="Email adresinizi yazınız" required />
+            </div>
+
+            <div class="p-10">
+                <label>Şifre</label>
+                <input type="password" class="form-control" name="Password" placeholder="Şifrenizi yazınız" required />
+            </div>
+
+            <div class="p-10">
+                <label>Şifre (Tekrar)</label>
+                <input type="password" class="form-control" name="RePassword" placeholder="Şifrenizi tekrar yazınız" required />
+            </div>
+
+            <div class="p-10">
+                <button type="submit" class="btn btn-info">Kaydet</button>
+                <a href="@Url.Action("Login", "User")" class="btn btn-danger">İptal</a>
+            </div>
+        }
+
+    </div>
+

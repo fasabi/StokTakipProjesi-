@@ -1,0 +1,61 @@
+﻿@using StokTakipProjesi.Models.Entites
+
+@model List<Users>
+
+@{
+    ViewBag.Title = "Kullanıcılar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var count = 1;
+}
+
+    <div class="row">
+        <div class="col-md-12 general-div bg-primary">
+            <h3 class="text-center"><b>Kullanıcılar</b></h3>
+        </div>
+
+        @if (ViewBag.Result != null && ViewBag.Message != null)
+        {
+            <div class="col-xs-12 general-div bg-@ViewBag.Result">
+                <p class="text-@ViewBag.Result">@ViewBag.Message</p>
+            </div>
+        }
+
+        <div class="col-xs-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Kullanıcı Adı</th>
+                        <th>Email Adresi</th>
+                        <th>Admin mi?</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>
+                                @count
+                            </td>
+                            <td>@user.Username</td>
+                            <td>@user.Email</td>
+                            <td>@user.IsAdmin</td>
+                            <td>
+                                @if (user.IsAdmin)
+                                {
+                                    <a href="@Url.Action("DontAdmin", "User", new { id = user.Id })" class="btn btn-xs btn-primary" title="Kullanıcı Yap"><i class="glyphicon glyphicon-remove-circle"></i></a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("DoAdmin", "User", new { id = user.Id })" class="btn btn-xs btn-success" title="Admin Yap"><i class="glyphicon glyphicon-ok-circle"></i></a>
+                                }
+                                <a href="@Url.Action("UserDelete", "User", new { id = user.Id })" class="btn btn-xs btn-danger" title="Sil"><i class="glyphicon glyphicon-trash"></i></a>
+                            </td>
+                        </tr>
+                        count++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

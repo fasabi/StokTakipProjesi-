@@ -1,0 +1,60 @@
+﻿@using StokTakipProjesi.Models.Entites
+
+@model Products
+
+@{
+    ViewBag.Title = "Ürün Güncelleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="row general-div">
+
+        <div class="col-md-12 general-div bg-info">
+            <h3 class="text-center"><b>Ürün Güncelle</b></h3>
+        </div>
+
+        @using (Html.BeginForm("ProductUpdate", "Home", FormMethod.Post, new { @class = "col-md-4 col-md-offset-4 form-group" }))
+        {
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="p-10">
+                @Html.Label("Ürün Adı")
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", required = "" })
+            </div>
+
+            <div class="p-10">
+                <label>Kategori Seçiniz</label>
+                @Html.DropDownListFor(m => m.Categories.Id, (List<SelectListItem>)ViewBag.CategoryList, "Kategori", new { @class = "form-control", required = "" })
+            </div>
+
+            <div class="p-10">
+                @Html.Label("Model")
+                @Html.TextBoxFor(m => m.Model, new { @class = "form-control", required = "" })
+            </div>
+
+            <div class="p-10">
+                @Html.Label("Marka")
+                @Html.TextBoxFor(m => m.Brand, new { @class = "form-control", required = "" })
+            </div>
+
+            <div class="p-10">
+                @Html.Label("Birim Fiyatı")
+                @Html.TextBoxFor(m => m.UnitPrice, new { @class = "form-control", required = "" })
+            </div>
+
+            <div class="p-10">
+                @Html.Label("Stok Adedi")
+                @Html.TextBoxFor(m => m.StockAmount, new { @class = "form-control", required = "" })
+            </div>
+
+            <div class="p-10">
+                @Html.Label("Stok Kodu")
+                @Html.TextBoxFor(m => m.StockCode, new { @class = "form-control", required = "" })
+            </div>
+
+            <div class="p-10">
+                <button type="submit" class="btn btn-info">Kaydet</button>
+            </div>
+        }
+
+    </div>
+

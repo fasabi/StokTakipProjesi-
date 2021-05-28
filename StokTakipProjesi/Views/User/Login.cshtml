@@ -1,0 +1,53 @@
+﻿@using StokTakipProjesi.Models.Entites
+
+@model Users
+
+@{
+    ViewBag.Title = "Gazi Stok Takip Projesi - Giriş";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row login-div bg-info">
+    <div class="col-md-6">
+        <div class="m-auto text-center" style="padding: 30px 0;">
+            <img src="~/Content/images/gazi_logo.png" alt="Gazi Üniversitesi" />
+            <h1>Gazi Üniversitesi</h1>
+            <h2>Stok Takip Sistemi</h2>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-xs-12 general-div bg-primary">
+            <h3 class="text-center"><b>Giriş Yap</b></h3>
+        </div>
+
+
+        @if (ViewBag.Result != null && ViewBag.Message != null)
+        {
+            <div class="col-xs-12 general-div bg-@ViewBag.Result" style="margin-top: 20px;">
+                <p class="text-@ViewBag.Result">@ViewBag.Message</p>
+            </div>
+        }
+
+        @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "col-md-6 col-md-offset-3 form-group", style="padding-top: 20px;" }))
+        {
+            @Html.ValidationSummary(true)
+            <div class="p-10">
+                <label>Kullanıcı Adı</label>
+                <input type="text" class="form-control" name="Username" placeholder="Kullanıcı adınızı yazınız" required />
+            </div>
+
+            <div class="p-10">
+                <label>Şifre</label>
+                <input type="password" class="form-control" name="Password" placeholder="Şifrenizi yazınız" required />
+            </div>
+
+            <div class="p-10">
+                <button type="submit" class="btn btn-info">Giriş</button>
+            </div>
+        }
+    </div>
+</div>
+
+
+

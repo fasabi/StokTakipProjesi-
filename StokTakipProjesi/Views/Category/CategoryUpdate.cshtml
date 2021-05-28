@@ -1,0 +1,30 @@
+﻿@using StokTakipProjesi.Models.Entites
+
+@model Categories
+
+@{
+    ViewBag.Title = "CategoryUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="row general-div">
+
+        <div class="col-md-12 general-div bg-info">
+            <h3 class="text-center"><b>Kategori Güncelle</b></h3>
+        </div>
+
+        @using (Html.BeginForm("CategoryUpdate", "Category", FormMethod.Post, new { @class = "col-md-4 col-md-offset-4 form-group" }))
+        {
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="p-10">
+                @Html.Label("Kategori Adı")
+                @Html.TextBoxFor(m => m.CategoryName, new { @class = "form-control", required = "" })
+            </div>
+
+            <div class="p-10">
+                <button type="submit" class="btn btn-info">Kaydet</button>
+            </div>
+        }
+
+    </div>
+

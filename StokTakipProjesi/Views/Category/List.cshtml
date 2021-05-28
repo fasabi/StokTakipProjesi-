@@ -1,0 +1,64 @@
+﻿@using StokTakipProjesi.Models.Entites
+
+@model List<Categories>
+
+@{
+    ViewBag.Title = "Kategori Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Users user = Session["login"] as Users;
+    var count = 1;
+}
+
+<div class="row">
+    <div class="col-md-12 general-div bg-primary">
+        <h3 class="text-center"><b>Kategoriler</b></h3>
+    </div>
+
+    @if (ViewBag.Result != null && ViewBag.Message != null)
+    {
+        <div class="col-xs-12 general-div bg-@ViewBag.Result">
+            <p class="text-@ViewBag.Result">@ViewBag.Message</p>
+        </div>
+    }
+
+    @if (user.IsAdmin)
+    {
+        <div class="col-xs-12 general-div">
+            <a href="@Url.Action("CategoryAdd", "Category")" class="btn btn-primary">Kategori Ekle</a>
+        </div>
+    }
+
+    <div class="col-xs-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Kategori Adı</th>
+                    @if (user.IsAdmin)
+                    {
+                        <th>İşlemler</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td>
+                            @count
+                        </td>
+                        <td>@category.CategoryName</td>
+                        @if (user.IsAdmin)
+                        {
+                            <td>
+                                <a href="@Url.Action("CategoryUpdate", "Category", new { id = category.Id })" class="btn btn-xs btn-info" title="Güncelle"><i class="glyphicon glyphicon-refresh"></i></a>&nbsp;
+                                <a href="@Url.Action("CategoryDelete", "Category", new { id = category.Id })" class="btn btn-xs btn-danger" title="Sil"><i class="glyphicon glyphicon-trash"></i></a>
+                            </td>
+                        }
+                    </tr>
+                    count++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@using StokTakipProjesi.Models.Entites
+
+@model Categories
+
+@{
+    ViewBag.Title = "CategoryAdd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="row general-div">
+
+        <div class="col-md-12 general-div bg-success">
+            <h3 class="text-center"><b>Yeni Kategori Ekle</b></h3>
+        </div>
+
+        @using (Html.BeginForm("CategoryAdd", "Category", FormMethod.Post, new { @class = "col-md-4 col-md-offset-4 form-group" }))
+        {
+            <div class="p-10">
+                <label>Kategori Adı</label>
+                <input type="text" class="form-control" name="CategoryName" placeholder="Kategori ismini yazınız" required />
+            </div>
+
+            <div class="p-10">
+                <button type="submit" class="btn btn-info">Kaydet</button>
+                <a href="@Url.Action("List", "Category")" class="btn btn-danger">İptal</a>
+            </div>
+        }
+
+    </div>

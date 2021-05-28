@@ -1,0 +1,60 @@
+﻿@using StokTakipProjesi.Models.Entites
+
+@model Products
+
+@{
+    ViewBag.Title = "Ürün Ekleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="row general-div">
+
+        <div class="col-md-12 general-div bg-success">
+            <h3 class="text-center"><b>Yeni Ürün Ekle</b></h3>
+        </div>
+
+        @using (Html.BeginForm("ProductAdd", "Home", FormMethod.Post, new { @class = "col-md-4 col-md-offset-4 form-group" }))
+        {
+            <div class="p-10">
+                <label>Ürün Adı</label>
+                <input type="text" class="form-control" name="Name" placeholder="Ürün ismini yazınız" required />
+            </div>
+
+            <div class="p-10">
+                <label>Kategori Seçiniz</label>
+                @Html.DropDownListFor(m => m.Categories.Id, (List<SelectListItem>)ViewBag.CategoryList, "Kategori Seçiniz", new { @class = "form-control", required = "" })
+            </div>
+
+            <div class="p-10">
+                <label>Model</label>
+                <input type="text" class="form-control" name="Model" placeholder="Model ismini yazınız" required />
+            </div>
+
+            <div class="p-10">
+                <label>Marka</label>
+                <input type="text" class="form-control" name="Brand" placeholder="Marka ismini yazınız" required />
+            </div>
+
+            <div class="p-10">
+                <label>Birim Fiyatı</label>
+                <input type="text" class="form-control" name="UnitPrice" value="10" required />
+            </div>
+
+            <div class="p-10">
+                <label>Stok Adedi</label>
+                <input type="number" class="form-control" name="StockAmount" value="1" required />
+            </div>
+
+            <div class="p-10">
+                <label>Stok Kodu</label>
+                <input type="text" class="form-control" name="StockCode" placeholder="Stok kodunu yazınız" required />
+            </div>
+
+            <div class="p-10">
+                <button type="submit" class="btn btn-info">Kaydet</button>
+                <a href="@Url.Action("Index", "Home")" class="btn btn-danger">İptal</a>
+            </div>
+        }
+
+    </div>
+

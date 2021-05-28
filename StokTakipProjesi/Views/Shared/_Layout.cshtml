@@ -1,0 +1,59 @@
+﻿@using StokTakipProjesi.Models.Entites
+
+@{ 
+    Users user = Session["login"] as Users;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Gazi Stok Takip", "Index", "Home", new { area = "" }, new { @class = "navbar-brand"})
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" style="float: none;">
+                    <li>@Html.ActionLink("Ürünler", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Kategoriler", "List", "Category")</li>
+                    @if (user != null)
+                    {
+                        if (user.IsAdmin)
+                        {
+                            <li>@Html.ActionLink("Kullanıcılar", "List", "User")</li>
+                        }
+                        <li class="align-right">@Html.ActionLink("Çıkış", "Logout", "User")</li>
+                    }
+                    else
+                    {
+                        <li class="align-right">@Html.ActionLink("Kayıt Ol", "Register", "User")</li>
+                        <li class="align-right">@Html.ActionLink("Giriş", "Login", "User")</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container container-body">
+        @RenderBody()
+        <div class="row p-10 text-center">
+            <p>&copy; @DateTime.Now.Year - Gazi Üniversitesi Stok Takip Sistemi</p>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
